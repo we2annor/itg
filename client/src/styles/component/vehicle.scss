@@ -1,0 +1,111 @@
+@import '../../index.scss';
+.vehicle {
+  margin: 0;
+  width: 20vw;
+  border-left: 1px solid rgb(203, 204, 203);
+  border-bottom: 1px solid rgb(203, 204, 203);
+
+  &:last-child {
+      border-right:1px solid rgb(203, 204, 203);
+  }
+  
+  @media only screen and (max-width: $bp-largest){
+      border-bottom: 1px solid rgb(203, 204, 203);
+      width: 35vw;
+      flex: 1 1 auto;
+
+      &:last-child {
+          flex-grow: 0;
+          width: 50%;
+      }
+  }
+
+  @media only screen and (max-width:$bp-large){
+      width: 100vw;
+      display: flex;
+      flex-direction: row;
+
+      &:last-child {
+          width: 100%;
+      }
+  }
+  
+  .media {
+      width: 100%;
+
+      img {
+          width: 100%;  
+      }
+
+      @media only screen and (max-width: $bp-large){
+          width: 65%;
+
+          img {
+              width: 100%;
+              display: block;
+          }
+      }
+
+      @media only screen and (max-width: $bp-smallest){
+          width: 100%;
+      }
+  }
+
+  .info {
+    padding: 2rem;
+    margin: 0;
+    text-align: center;
+  
+    @media only screen and (max-width:$bp-large){
+        padding: .5rem 2rem 0 2rem;
+        width: 100%;
+        text-align: left;
+    }
+
+    @media only screen and (max-width: $bp-smallest){
+        padding: 1rem 2.5rem 0 2.5rem;
+    }
+
+    .header {
+        border-top: 1px solid rgb(46, 45, 45);
+        border-bottom: 1px solid rgb(46, 45, 45);
+        padding: 0;
+        margin: 1rem;
+        line-height: 5rem;
+        display: inline-block;
+        text-transform: uppercase;
+        letter-spacing: .4rem;
+
+        @media only screen and (max-width:$bp-large){
+            border: none;
+            margin: 0;
+            line-height: 2.5rem;
+            letter-spacing: .2rem;
+            font-size: 1.2rem;
+            display: block;
+        }
+
+        @media only screen and (max-width: $bp-smallest){
+            line-height: 3rem;
+        }
+
+    }
+
+    .price, .description {
+        padding: 1rem 0;
+        margin: 1rem 0;
+
+        @media only screen and (max-width:$bp-large){
+            padding: .2rem;
+            margin: 0;
+            font-size: 1.4rem;
+            line-height: 1.8rem;
+        }
+
+        @media only screen and (max-width: $bp-smallest){
+            padding: .5rem;
+        }
+    }
+  }
+}
+
