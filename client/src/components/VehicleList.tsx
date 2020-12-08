@@ -31,10 +31,6 @@ const VehicleList:React.FC = () => {
     getVehicles();
   }, []);
 
-  const renderVehicles = vehicles.map((vehicle) => (
-      <Vehicle key={vehicle.id} vehicle={vehicle} />
-  ));
-
   if(!loading){
     return <Loading message={'Loading...'}/>
   }
@@ -44,7 +40,9 @@ const VehicleList:React.FC = () => {
   }
   
   return (
-      <div className="vehicle-list-container">{renderVehicles}</div>
+      <div className="vehicle-list-container">
+        { vehicles.map((vehicle) => (<Vehicle key={vehicle.id} vehicle={vehicle} />))}
+      </div>
   );
 };
 

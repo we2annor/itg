@@ -4,7 +4,7 @@ import App from './App';
 
 describe('when all is well',()=>{
   test('should render App', () => {
-    const {getByText}=render(<App />);
+    render(<App />);
     //const linkElement = screen.getByText();
    // expect(linkElement).toBeInTheDocument();
   });  

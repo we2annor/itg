@@ -1,4 +1,3 @@
-import { stringify } from "querystring";
 import React from "react";
 
 interface Props {

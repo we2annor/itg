@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { LazyLoad } from "./LazyLoad.jsx";
+import { LazyLoad } from "./LazyLoad";
+import Loading from './Loading';
+import Error from './Error';
 import "../styles/component/vehicle.scss";
 
 interface VehicleProps {
@@ -46,11 +48,11 @@ const VehicleDetail: React.FC<Props> = ({ vehicle }) => {
   }, [vehicle.id]);
 
   if (!vehicleInfo || !vehicle || !loading) {
-    return <div>Loading...</div>;
+    return <Loading message={'Loading...'}/>;
   }
 
   if (error) {
-    return <div>Error occured, please try again</div>;
+    return <Error message={`Error Ocuured: ${error}`}/>;
   }
 
   const media = vehicle.media[0];
