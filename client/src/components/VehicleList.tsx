@@ -29,7 +29,10 @@ const VehicleList:React.FC = () => {
   ));
   
   return (
-      <div className="vehicle-list-container">{renderVehicles}</div>
+      <div className="vehicle-list-container">
+        <h2>Vehicle List</h2>
+        {renderVehicles}
+      </div>
   );
 };
 
