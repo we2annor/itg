@@ -46,7 +46,7 @@ const VehicleList:React.FC = () => {
   }
   
   return (
-      <div className="vehicle-list-container">
+      <div data-testid="vehicleList" className="vehicle-list-container">
         { vehicles.map((vehicle) => (<Vehicle key={vehicle.id} vehicle={vehicle} />))}
       </div>
   );

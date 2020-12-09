@@ -1,17 +1,12 @@
 import React from 'react';
-import {cleanup, render,screen, waitFor } from '@testing-library/react';
-import axios from 'axios';
+import {cleanup, render,screen } from '@testing-library/react';
 import VehicleList from '../VehicleList';
 
-jest.mock('axios');
-
 afterEach(cleanup);
-
-
-describe('When all is well', ()=>{
+describe('Renders Vehicle list component without crashsing', ()=>{
     test('VehicleList renders', async ()=>{
-        render(<VehicleList/>);
-        
+        const {getByTestId} = render(<VehicleList/>);
+        expect(getByTestId('loading')).toHaveTextContent('Loading data...');
     })
     screen.debug();
 })
