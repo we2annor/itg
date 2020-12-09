@@ -5,7 +5,7 @@ interface Props {
 }
 
 const Loading: React.FC<Props> = ({ message }) => {
-  return <div>{message}</div>;
+  return <div data-testid="loading">{message}</div>;
 };
 
 export default Loading;

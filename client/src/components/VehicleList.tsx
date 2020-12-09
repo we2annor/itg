@@ -17,11 +17,14 @@ const VehicleList:React.FC = () => {
   const [loading, setLoading]=useState(false)
 
   useEffect(() => {
+    let mounted = true;
     const getVehicles = async () => {
       try{
         const { data } = await axios.get("/api/vehicle");
-        setVehicles(data.vehicles);
-        setLoading(true);
+        if(mounted){
+          setVehicles(data.vehicles);
+          setLoading(true);  
+        }
       }catch(err){
         setError(err);
         setLoading(true);
@@ -29,14 +32,17 @@ const VehicleList:React.FC = () => {
       }
     };
     getVehicles();
+    return ()=>{
+      mounted = false;
+    }
   }, []);
 
   if(!loading){
-    return <Loading message={'Loading...'}/>
+    return <Loading message={'Loading data...'}/>
   }
 
   if(error){
-    return <Error message={`Error occured: ${error}`}/>
+    return <Error message={`Error occured while loading data: ${error}`}/>
   }
   
   return (

@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "outDir": "dist",
     "lib": [
       "dom",
       "dom.iterable",
@@ -25,7 +24,3 @@
     "src"
   ]
 }
-
-
-
-

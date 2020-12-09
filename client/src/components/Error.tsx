@@ -5,7 +5,7 @@ interface Props {
 }
 
 const Error: React.FC<Props> = ({ message }) => {
-  return <div>{message}</div>;
+  return <div data-testid="error-div">{message}</div>;
 };
 
 export default Error;

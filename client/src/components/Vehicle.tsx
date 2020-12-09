@@ -33,11 +33,14 @@ const VehicleDetail: React.FC<Props> = ({ vehicle }) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    let mounted = true;
     const getVehicleInfo = async () => {
       try {
         const { data } = await axios.get(`/api/vehicle/${vehicle.id}`);
-        setVehicleInfo(data);
-        setLoading(true);
+        if(mounted){
+          setVehicleInfo(data);
+          setLoading(true);
+        }
       } catch (err) {
         setError(err);
         setVehicleInfo({ id: "", description: "", price: 0 });
@@ -45,10 +48,14 @@ const VehicleDetail: React.FC<Props> = ({ vehicle }) => {
       }
     };
     getVehicleInfo();
+
+    return ()=>{
+      mounted = false;
+    }
   }, [vehicle.id]);
 
   if (!vehicleInfo || !vehicle || !loading) {
-    return <Loading message={'Loading...'}/>;
+    return <Loading message={'Loading data...'}/>;
   }
 
   if (error) {
@@ -58,7 +65,7 @@ const VehicleDetail: React.FC<Props> = ({ vehicle }) => {
   const media = vehicle.media[0];
 
   return (
-    <div className='vehicle'>
+    <div data-testid="resolved-vehicle-data" className='vehicle'>
       <div className='media'>
         <LazyLoad src={media.url} alt={vehicleInfo.id} />
       </div>
