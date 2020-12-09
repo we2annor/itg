@@ -4,6 +4,10 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+if(process.env.NODE_ENV === 'development'){
+  const {worker} = require( './mocks/browser')
+  worker.start()
+}
 const Root = document.querySelector('#root');
 ReactDOM.render(
   <React.StrictMode>

@@ -18,7 +18,7 @@ const VehicleList:React.FC = () => {
 
   useEffect(() => {
     let mounted = true;
-    const getVehicles = async () => {
+    const fetchVehicles = async () => {
       try{
         const { data } = await axios.get("/api/vehicle");
         if(mounted){
@@ -31,7 +31,7 @@ const VehicleList:React.FC = () => {
         setVehicles([]);
       }
     };
-    getVehicles();
+    fetchVehicles();
     return ()=>{
       mounted = false;
     }

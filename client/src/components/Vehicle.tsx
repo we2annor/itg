@@ -34,7 +34,7 @@ const VehicleDetail: React.FC<Props> = ({ vehicle }) => {
 
   useEffect(() => {
     let mounted = true;
-    const getVehicleInfo = async () => {
+    const fetchVehicleInfo = async () => {
       try {
         const { data } = await axios.get(`/api/vehicle/${vehicle.id}`);
         if(mounted){
@@ -47,7 +47,7 @@ const VehicleDetail: React.FC<Props> = ({ vehicle }) => {
         setLoading(true);
       }
     };
-    getVehicleInfo();
+    fetchVehicleInfo();
 
     return ()=>{
       mounted = false;

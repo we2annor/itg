@@ -44,6 +44,7 @@
   },
   "proxy": "http://localhost:9988/",
   "devDependencies": {
-    "@types/styled-components": "^5.1.4"
+    "@types/styled-components": "^5.1.4",
+    "msw": "^0.24.1"
   }
 }
