@@ -7,7 +7,8 @@
     "client": "cd client && yarn run start",
     "server": "nodemon index.js",
     "dev": "concurrently -n CLIENT,NODEMON -c yellow,blue --kill-others-on-fail \"yarn run client\" \"yarn run server\"",
-    "client:build": "cd client && yarn run build"
+    "client:build": "cd client && yarn run build",
+    "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
   },
   "author": "",
   "license": "ISC",

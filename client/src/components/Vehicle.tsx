@@ -59,13 +59,13 @@ const VehicleDetail: React.FC<Props> = ({ vehicle }) => {
   }
 
   if (error) {
-    return <Error message={`Error Ocuured: ${error}`}/>;
+    return <Error message={`Error Occured: ${error}`}/>;
   }
 
   const media = vehicle.media[0];
 
   return (
-    <div data-testid="resolved-vehicle-data" className='vehicle'>
+    <div data-role="vehicle" data-testid="vehicle" className='vehicle'>
       <div className='media'>
         <LazyLoad src={media.url} alt={vehicleInfo.id} />
       </div>

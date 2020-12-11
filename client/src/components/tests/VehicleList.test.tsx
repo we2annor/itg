@@ -1,46 +1,44 @@
 import React from 'react';
-import {rest} from 'msw';
-import {setupServer} from 'msw/node';
-import { getByTestId, render,screen, waitFor } from '@testing-library/react';
+import {render, waitFor, act, waitForElementToBeRemoved } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import VehicleList from '../VehicleList';
 
-const server = setupServer(rest.get('/api/vehicle', (req,res,ctx)=>{
-    const vehicle =  {
-        id:'xf',
-        modelYear:'2020',
-        url: '/api/vehicle',
-        media: [],
-      }
-    return res(ctx.status(200),ctx.json({vehicle: vehicle}))
-}))
+test('should display test Loading data... while loading vehicles', async ()=>{
+    await act(async ()=>{
+        const {getByTestId} = render(<VehicleList />)
 
-beforeAll(()=> server.listen());
-afterEach(()=>server.resetHandlers());
-afterEach(()=>server.close())
-
-test('loads and diplays Vehicles', async ()=>{
-    const {getByTestId} = render(<VehicleList />)
-
-    const renderedResults = await waitFor(()=>getByTestId('vehicle-list-data'))
-    expect(renderedResults).toHaveLength(2);
-})
-
-test('handles server error', async ()=>{
-    const {getByTestId}= render(<VehicleList />);
-    server.use(rest.get('/api/vehicle', (req,res, ctx)=>{
-        return res(ctx.status(500), ctx.json({errorMessage: 'Error occured while loading data'}));
-    }))
-
-    const renderedResults = await waitFor(()=>getByTestId('error-div'));
-    expect(renderedResults).toHaveTextContent(`Error occured while loading data`)
-})
-//afterEach(cleanup);
-describe('Renders Vehicle list component without crashsing', ()=>{
-    test('VehicleList renders', async ()=>{
-        const {getByTestId} = render(<VehicleList/>);
-        expect(getByTestId('loading')).toHaveTextContent('Loading data...');
+        const loadingComponent = await waitFor(()=>getByTestId('loading'))
+        expect(loadingComponent).toHaveTextContent('Loading data...');
     })
-    screen.debug();
 })
 
+test('should removes text "Loading data..." after displaying Vehicles', async ()=>{
+    await act(async ()=>{
+        const {getByTestId} = render(<VehicleList />);
+
+        const removedElement = await waitForElementToBeRemoved(getByTestId('loading'));
+        expect(removedElement).toBeUndefined();
+    })
+})
+
+test('should display vehicles', async ()=>{
+    await act(async ()=>{
+        const {findAllByTestId}= render(<VehicleList />);
+
+        const renderedElement = await findAllByTestId('vehicleList');
+        expect(renderedElement).toHaveLength(1);
+        expect(renderedElement.map((ele=>ele.TEXT_NODE))).toStrictEqual([3])
+        console.log('render', renderedElement);
+    })
+})
+
+test('should display Error component when an error occured', async ()=>{
+    await act(async ()=>{
+        const {getByTestId}= render(<VehicleList />);
+
+        const errorComponent = await waitFor(()=>getByTestId('error-div'));
+        expect(errorComponent).toBeVisible();
+        expect(errorComponent).toHaveTextContent('Error Occured')
+        expect(errorComponent).toBeInTheDocument();
+    })
+})
