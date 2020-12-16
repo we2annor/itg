@@ -31,7 +31,7 @@ interface Props {
 
 export const LazyLoad: React.FC<Props> = ({ src, alt }) => {
   const [imageSrc, setImageSrc] = useState(placeholder);
-  const [imageRef, setImageRef] = useState();
+  const [imageRef, setImageRef] = useState<HTMLImageElement | null>(null);
 
   const onLoad = (event: any) => {
     event.target.classList.add("loaded");

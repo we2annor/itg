@@ -52,6 +52,7 @@ test('should removes text "Loading data..." after displaying Vehicles', async ()
       const {findByTestId} = render(<Vehicle vehicle={vehicle} />);
 
       const renderedVehicle = await findByTestId('vehicle');
+      e//xpect(renderedVehicle)
       expect(renderedVehicle).toHaveLength(3);
     })
   })

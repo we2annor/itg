@@ -38,7 +38,7 @@ test('should display Error component when an error occured', async ()=>{
 
         const errorComponent = await waitFor(()=>getByTestId('error-div'));
         expect(errorComponent).toBeVisible();
-        expect(errorComponent).toHaveTextContent('Error Occured')
+        expect(errorComponent).toHaveTextContent('Error Occured:')
         expect(errorComponent).toBeInTheDocument();
     })
 })
